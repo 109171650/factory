@@ -1,0 +1,38 @@
+<% include header.html %>
+  <div class="content">
+      <table style="width:400px">
+        <caption>
+          <em><%= data['showTableStatus'][0]['Comment'] %>表[<%= data['showTableStatus'][0]['Name'] %>]</em>
+          <span><a href="<%= app_root_path+'table/insert/table_name/'+data['showTableStatus'][0]['Name'] %>">添加数据</a></span>
+        </caption>
+
+          <% for(var i=0; i<Object.keys(data['showTableStatus'][0]).length; i++) { %>
+              <tr <% if(i%2 == 0){ %> style="background-color:#edecec;"<% } %> >
+                <td><%= Object.keys(data['showTableStatus'][0])[i] %></td>
+                <td><%= data['showTableStatus'][0][Object.keys(data['showTableStatus'][0])[i]] %></td>
+              </tr>
+          <% } %>
+
+      </table>
+      <table style="width:1000px">
+        <caption>
+          <span><a href="<%= app_root_path %>table/index/table_name/<%= data['showTableStatus'][0]['Name'] %>" >数据管理</a></span>
+        </caption>
+
+        <tr>
+            <% for(var k=0,len=Object.keys(data['showFullFields'][0]).length; k<len; k++) { %>
+                <td><%= Object.keys(data['showFullFields'][0])[k] %></td>
+            <% } %>
+        </tr>
+          <% for(var i=0; i<data['showFullFields'].length; i++) { %>
+          <tr <% if(i%2 == 0){ %> style="background-color:#edecec;"<% } %>>
+              <% for(var k=0,len2=Object.keys(data['showFullFields'][i]).length; k<len2; k++) { %>
+                  <td><%= data['showFullFields'][i][Object.keys(data['showFullFields'][i])[k]] %></td>
+              <% } %>
+          </tr>
+          <% } %>
+
+      </table>
+  </div>
+
+<% include footer.html %>

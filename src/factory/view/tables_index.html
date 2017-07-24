@@ -1,0 +1,45 @@
+<% include header.html %>
+  <div class="content">
+      <table>
+        <tr>
+          <th>序号</th>
+          <th>表名</th>
+          <th>中文注释</th>
+          <th>数据条数</th>
+          <th>数据大小</th>
+          <th>创建时间</th>
+          <th>更新时间</th>
+          <th>引擎</th>
+          <th style="width:130px;">操作</th>
+        </tr>
+        <% for(var i=0, j=1, len=tables.length; i<len; i++) {%>
+          <tr <% if(i%2 == 0){ %> style="background-color:#ddd;"<% } %> >
+              <td><%= i+j %></td>
+
+              <td>
+                  <a href="<%= app_root_path %>table/index/table_name/<%= tables[i]['Name'] %>" ><%= tables[i]['Name'] %></a>
+              </td>
+              <td>
+                  <%= tables[i]['Comment'] %>
+              </td>
+              <td>
+                  <%= tables[i]['Rows'] %>
+              </td>
+              <td>
+                  <%= tables[i]['Data_length'] %>
+              </td>
+              <td>
+                  <%= tables[i]['Create_time'] %>
+              </td>
+              <td>
+                  <%= tables[i]['Update_time'] %>
+              </td>
+              <td>
+                  <%= tables[i]['Engine'] %>
+              </td>
+              <td style="text-align:center;"><a href="<%= app_root_path %>table/status/table_name/<%= tables[i]['Name'] %>" >表结构</a></td>
+          </tr>
+        <% } %>
+      </table>
+  </div>
+<% include footer.html %>

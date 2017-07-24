@@ -1,0 +1,32 @@
+<% include header.html %>
+  <div class="content">
+    <ul>
+      <li><a href="<%= app_root_path %>tables">tables</a></li>
+      <li><a href="<%= app_root_path %>menu">menu</a></li>
+    </ul>
+<table>
+  <tr style="background-color:#ddd;">
+    <caption>系统</caption>
+  </tr>
+  <% var len=0,len2=0; %>
+  <% for(var i in data['system']) {%>
+    <% len++; %>
+    <tr <% if(len%2 == 0){ %> style="background-color:#edecec;"<% } %> >
+        <td style="text-align:right;padding-right:5px;"><%= i %></td>
+        <td><%= data['system'][i] %></td>
+    </tr>
+  <% } %>
+
+  <% for(var i in data['processmemoryUsage']) {%>
+    <% len2++; %>
+    <tr <% if(len2%2 == 0){ %> style="background-color:#edecec;"<% } %>>
+        <td style="text-align:right;padding-right:5px;"><%= i %></td>
+        <td><%= data['processmemoryUsage'][i] %></td>
+    </tr>
+  <% } %>
+</table>
+
+
+</div>
+
+<% include footer.html %>

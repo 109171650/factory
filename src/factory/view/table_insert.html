@@ -1,0 +1,100 @@
+<% include header.html %>
+  <div class="content">
+      <table>
+        <caption>
+          <td>代码生成</td>
+          <td>api</td>
+          <td>admin</td>
+          <td>home</td>
+        </caption>
+        <tr>
+          <td colspan="100">
+            <span><a href="<%= app_root_path %>tables/" >所有表</a></span>
+
+            <span><a href="<%= app_root_path %>table/status/table_name/<%= data['showTableStatus'][0].Name %>" >表结构</a></span>
+            <span><a href="" target='_blank'>添加数据</a></span>
+          </td>
+        </tr>
+        <tr>
+            <td width="10%">字段名</td>
+            <td width="8%">字段值</td>
+            <td width="10%">数据类型</td>
+            <td width="2%">为空</td>
+            <td width="7%">后台列表是否显示</td>
+            <td width="7%">是否可编辑</td>
+            <td width="5%">表单类型</td>
+            <td width="50%">数据内容</td>
+        </tr>
+      </table>
+
+      <table id="tableObj">
+          <% for(var i=0,len=data['showFullFields'].length; i<len; i++ ) { %>
+            <% var json1 = (eval("("+data['showFullFields'][i]['Comment'].split('|')[1]+")")); %>
+
+          <tr <% if(i%2 == 0){ %> style="background-color:#edecec;"<% } %>>
+              <td><%= data['showFullFields'][i]['Comment'].split('|')[0] %></td>
+              <td id="fieldName"><%= data['showFullFields'][i].Field %></td>
+              <td><%= data['showFullFields'][i].Type %></td>
+              <td><%= data['showFullFields'][i].Null %></td>
+              <td>
+                <select class="" name="">
+                  <option value="">是</option>
+                  <option value="">否</option>
+                </select>
+              </td>
+              <td>
+                <select class="" name="">
+                  <option value="">是</option>
+                  <option value="">否</option>
+                </select>
+</div>
+              </td>
+
+              <td>
+                    <select id="fieldType">
+                      <% for( var k=0,len2=data['htmlInput'].length; k<len2; k++){ %>
+                        <%  if (json1) { %>
+                          <option value ="<%= data['htmlInput'][k]['name']; %>" <% if(data['htmlInput'][k]['name'] == json1['inputType']) { %> selected="selected" <% } %> ><%= data['htmlInput'][k]['name']; %></option>
+                        <% }else{ %>
+                          <option value ="<%= data['htmlInput'][k]['name']; %>" ><%= data['htmlInput'][k]['name']; %></option>
+                        <% } %>
+                      <% } %>
+                    </select>
+              </td>
+
+              <td>
+                <% if( data['showFullFields'][i].Field == 'id' ){ %>
+                   <%= data['showFullFields'][i].Field %>
+                <% }else{ %>
+                <input
+                  type="text"
+                  name="<%= data['showFullFields'][i].Field %>"
+                  id="<%= data['showFullFields'][i].Field %>"
+                  value="<%= data['showFullFields'][i].Comment %>"
+                >
+                <% } %>
+              </td>
+
+          </tr>
+          <% } %>
+        </table>
+        <table>
+          <tr>
+            <td><input id="btn" type="submit" name="" value="保存"></td>
+          </tr>
+
+      </table>
+  </div>
+
+  <script type="text/javascript">
+
+    var tableObj = document.getElementById('tableObj');
+    var fieldType = document.getElementsByTagName('select');
+    var trrows = tableObj.rows;
+        fieldType.onchange=function(){
+          alert(fieldType.value);
+          // alert(tableObj.rows.length);
+        }
+
+  </script>
+<% include footer.html %>

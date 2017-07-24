@@ -1,0 +1,38 @@
+<% include header.html %>
+  <div class="content">
+      <table style="width:100%">
+        <tr>
+          <td colspan="100">
+            <span><a href="<%= app_root_path %>tables/" >所有表</a></span>
+
+            <span><a href="<%= app_root_path %>table/status/table_name/<%= data['showTableStatus'][0].Name %>" >表结构</a></span>
+            <span><a href="<%= app_root_path+'table/insert/table_name/'+data['showTableStatus'][0]['Name'] %>">添加数据</a></span>
+          </td>
+        </tr>
+
+        <tr>
+          <th>序号</th>
+          <% for(var i=0,len=data['showFullFields'].length; i<len; i++ ) { %>
+          <th><%= data['showFullFields'][i].Comment %>[<%= data['showFullFields'][i].Field %>] </th>
+          <% } %>
+        </tr>
+
+          <% for(var k=0,n=1,len2=data['list'].length; k<len2; k++){ %>
+            <tr <% if(k%2 == 0){ %> style="background-color:#edecec;"<% } %> >
+              <td><%= n++ %></td>
+              <% for(var j=0,len3=data['showFullFields'].length; j<len3; j++ ) { %>
+              <td>
+                <% if(data['showFullFields'][j].Field == 'url'){ %>
+                  <a href="<%= data['list'][k][data['showFullFields'][j].Field] %>" target="_blank"><%= data['list'][k][data['showFullFields'][j].Field] %></a>
+                <% }else{ %>
+                  <%= data['list'][k][data['showFullFields'][j].Field] %>
+                <% } %>
+              </td>
+              <% } %>
+            </tr>
+          <% } %>
+
+      </table>
+  </div>
+
+<% include footer.html %>

@@ -1,0 +1,40 @@
+<% include header.html %>
+  <div class="content">
+      <table style="width:100%">
+        <tr>
+            <th>序号</th>
+          <% for( var i=0,len1=data['showfullcolumns'].length; i<len1; i++ ) { %>
+            <th><%= data['showfullcolumns'][i].Comment %>[<%= data['showfullcolumns'][i].Field %>] </th>
+          <% } %>
+        </tr>
+
+        <% for( var i=0,a=1,len2=data['menu'].length; i<len2; i++) {%>
+          <tr style="background-color:#000;color:#fff;">
+            <td ><%= a++ %></td>
+            <% for(var j=0,len3=data['showfullcolumns'].length; j<len3; j++) { %>
+            <td><%= data['menu'][i][data['showfullcolumns'][j].Field] %></td>
+            <% } %>
+        </tr>
+
+            <% for( var k=0,len4=data['menu'][i]['level_2'].length; k<len4; k++ ){ %>
+            <tr style="background-color:green;">
+              <td><%= a++ %></td>
+                <% for(var l=0,len5=data['showfullcolumns'].length; l<len5; l++ ){ %>
+                <td><% if(data['showfullcolumns'][l].Field == 'title'){ %>&nbsp;&nbsp;<% } %><%= data['menu'][i]['level_2'][k][data['showfullcolumns'][l].Field] %></td>
+                <% } %>
+            </tr>
+                <tr>
+                <% for( var m=0,len6=data['menu'][i]['level_2'][k]['level_3'].length; m<len6; m++ ){ %>
+                    <td><%= a++ %></td>
+                    <% for( var n=0, len7=data['showfullcolumns'].length; n<len7; n++ ){ %>
+                    <td><% if(data['showfullcolumns'][n].Field == 'title'){ %>&nbsp;&nbsp;&nbsp;&nbsp;<% } %><%= data['menu'][i]['level_2'][k]['level_3'][m][data['showfullcolumns'][n].Field] %></td>
+                    <% } %>
+                </tr>
+                <% } %>
+            <% } %>
+
+        <% } %>
+      </table>
+  </div>
+
+<% include footer.html %>
